@@ -28,3 +28,15 @@ A Jenkins pipeline pulls this repo from GitHub, runs the test plan in JMeter non
 - Add PUT, PATCH and DELETE requests using the token
 - More assertions and timers
 - Fail the Jenkins build when assertions fail
+
+## Note: viewing the dashboard in Jenkins
+Jenkins blocks the JavaScript in hosted HTML reports by default, so the JMeter dashboard can show up blank (empty charts). On a local Jenkins, this fixes it:
+
+1. Go to **Manage Jenkins → Script Console**.
+2. Run:
+```
+   System.setProperty("hudson.model.DirectoryBrowserSupport.CSP", "")
+```
+3. Run the build again and open **JMeter Dashboard**.
+
+This setting resets when Jenkins restarts, so it has to be run again after a restart. It relaxes a security rule, so use it only on a local or personal Jenkins, not a shared one.
